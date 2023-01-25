@@ -5,6 +5,9 @@
         <title>Sleeper Depth Chart</title>
     </head>
 
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
     <!-- div for an input box and button that allows the user to submit an ID -->
     <div>
         <h1>Enter League ID</h1>
@@ -18,17 +21,18 @@
         </form>
     </div>
 
-    <!-- div for a heading that displays the given ID -->
-    {% if id %}
-    <div>
-        <h1>League ID: {{ id }}</h1>
-    </div>
-    {% endif %}
-
     <!-- div for a table that displays the owner_id and all positions from the rosters object-->
     {% if rosters %}
-    <div>
-        <table>
+    <div class="container">
+
+        <!-- div for a heading that displays the given ID -->
+        {% if id %}
+        <div>
+            <h1>League ID: {{ id }}</h1>
+        </div>
+        {% endif %}
+
+        <table class="table">
             <tr>
                 <th>Owner ID</th>
                 <th>QBs</th>
