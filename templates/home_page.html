@@ -40,33 +40,68 @@
                 <th>WRs</th>
                 <th>TEs</th>
                 <th>Ks</th>
+                <th>DEFs</th>
             </tr>
             {% for roster in rosters %}
             <tr>
                 <td>{{ roster.owner_id }}</td>
                 <td>
                     {% for qb in roster.qbs %}
-                        {{ qb }}<br>
+                        {% set qb_name = players[qb]['full_name'] %}
+                        {% if qb in roster.starters %}
+                            <b>{{ qb_name }}</b><br>
+                        {% else %}
+                            {{ qb_name }}<br>
+                        {% endif %}
                     {% endfor %}
                 </td>
                 <td>
                     {% for rb in roster.rbs %}
-                        {{ rb }}<br>
+                        {% set rb_name = players[rb]['full_name'] %}
+                        {% if rb in roster.starters %}
+                            <b>{{ rb_name }}</b><br>
+                        {% else %}
+                            {{ rb_name }}<br>
+                        {% endif %}
                     {% endfor %}
                 </td>
                 <td>
                     {% for wr in roster.wrs %}
-                        {{ wr }}<br>
+                        {% set wr_name = players[wr]['full_name'] %}
+                        {% if wr in roster.starters %}
+                            <b>{{ wr_name }}</b><br>
+                        {% else %}
+                            {{ wr_name }}<br>
+                        {% endif %}
                     {% endfor %}
                 </td>
                 <td>
                     {% for te in roster.tes %}
-                        {{ te }}<br>
+                        {% set te_name = players[te]['full_name'] %}
+                        {% if te in roster.starters %}
+                            <b>{{ te_name }}</b><br>
+                        {% else %}
+                            {{ te_name }}<br>
+                        {% endif %}
                     {% endfor %}
                 </td>
                 <td>
                     {% for k in roster.ks %}
-                        {{ k }}<br>
+                        {% set k_name = players[k]['full_name'] %}
+                        {% if k in roster.starters %}
+                            <b>{{ k_name }}</b><br>
+                        {% else %}
+                            {{ k_name }}<br>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for def in roster.defs %}
+                        {% if def in roster.starters %}
+                            <b>{{ def }}</b><br>
+                        {% else %}
+                            {{ def }}<br>
+                        {% endif %}
                     {% endfor %}
                 </td>
             </tr>

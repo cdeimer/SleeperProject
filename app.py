@@ -11,7 +11,9 @@ def home():
         league_id = request.form['id']
         league_name = get_league_info(league_id)['name']
         rosters = get_rosters(league_id)
-        return render_template('home_page.html', id=league_id, rosters=rosters, league_name=league_name)
+        players = json.load(open('sleeper_players.json'))
+        print(rosters)
+        return render_template('home_page.html', id=league_id, rosters=rosters, league_name=league_name, players=players)
     return render_template('home_page.html')
 
 
@@ -30,11 +32,12 @@ def get_rosters(league_id):
         for roster in data:
             r = {}
             r['owner_id'] = users[roster['owner_id']]['display_name'] if roster['owner_id'] in users else roster['owner_id']
-            r['qbs'] = [players[p]['full_name'] for p in roster['players'] if players[p]['position'] == 'QB']
-            r['rbs'] = [players[p]['full_name'] for p in roster['players'] if players[p]['position'] == 'RB']
-            r['wrs'] = [players[p]['full_name'] for p in roster['players'] if players[p]['position'] == 'WR']
-            r['tes'] = [players[p]['full_name'] for p in roster['players'] if players[p]['position'] == 'TE']
-            r['ks'] = [players[p]['full_name'] for p in roster['players'] if players[p]['position'] == 'K']                
+            r['qbs'] = [p for p in roster['players'] if players[p]['position'] == 'QB']
+            r['rbs'] = [p for p in roster['players'] if players[p]['position'] == 'RB']
+            r['wrs'] = [p for p in roster['players'] if players[p]['position'] == 'WR']
+            r['tes'] = [p for p in roster['players'] if players[p]['position'] == 'TE']
+            r['ks'] = [p for p in roster['players'] if players[p]['position'] == 'K']
+            r['defs'] = [players[p]['player_id'] for p in roster['players'] if players[p]['position'] == 'DEF']
             r['players'] = roster['players']
             r['starters'] = roster['starters']
             r['reserve'] = roster['reserve']
