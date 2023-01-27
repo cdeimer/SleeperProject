@@ -34,13 +34,28 @@ def get_rosters(league_id):
             r['owner_id'] = users[roster['owner_id']]['display_name'] if roster['owner_id'] in users else roster['owner_id']
             r['qbs'] = [p for p in roster['players'] if players[p]['position'] == 'QB']
             r['rbs'] = [p for p in roster['players'] if players[p]['position'] == 'RB']
-            r['wrs'] = [p for p in roster['players'] if players[p]['position'] == 'WR']
+            #r['wrs'] = [p for p in roster['players'] if players[p]['position'] == 'WR']
             r['tes'] = [p for p in roster['players'] if players[p]['position'] == 'TE']
             r['ks'] = [p for p in roster['players'] if players[p]['position'] == 'K']
             r['defs'] = [players[p]['player_id'] for p in roster['players'] if players[p]['position'] == 'DEF']
             r['players'] = roster['players']
             r['starters'] = roster['starters']
             r['reserve'] = roster['reserve']
+
+            player_object_list = []
+            for player in roster['players']:
+                if 'full_name' in players[player]:
+                    player_object = {
+                        'player_id': players[player]['player_id'],
+                        'position': players[player]['position'],
+                        'full_name': players[player]['full_name'],
+                        'rank': players[player]['search_rank']
+                    }
+                    player_object_list.append(player_object)
+            
+            player_object_list.sort(key=lambda x: x['rank'])
+            r['player_objects'] = player_object_list
+            
             rosters.append(r)
     return rosters
 

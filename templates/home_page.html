@@ -46,42 +46,38 @@
             <tr>
                 <td>{{ roster.owner_id }}</td>
                 <td>
-                    {% for qb in roster.qbs %}
-                        {% set qb_name = players[qb]['full_name'] %}
-                        {% if qb in roster.starters %}
-                            <b>{{ qb_name }}</b><br>
+                    {% for qb in roster.player_objects|selectattr('position', 'equalto', 'QB') %}
+                        {% if qb['player_id'] in roster.starters %}
+                            <b>{{ qb['full_name'] }}</b><br>
                         {% else %}
-                            {{ qb_name }}<br>
+                            {{ qb['full_name'] }}<br>
                         {% endif %}
                     {% endfor %}
                 </td>
                 <td>
-                    {% for rb in roster.rbs %}
-                        {% set rb_name = players[rb]['full_name'] %}
-                        {% if rb in roster.starters %}
-                            <b>{{ rb_name }}</b><br>
+                    {% for rb in roster.player_objects|selectattr('position', 'equalto', 'RB') %}
+                        {% if rb['player_id'] in roster.starters %}
+                            <b>{{ rb['full_name'] }}</b><br>
                         {% else %}
-                            {{ rb_name }}<br>
+                            {{ rb['full_name'] }}<br>
                         {% endif %}
                     {% endfor %}
                 </td>
                 <td>
-                    {% for wr in roster.wrs %}
-                        {% set wr_name = players[wr]['full_name'] %}
-                        {% if wr in roster.starters %}
-                            <b>{{ wr_name }}</b><br>
+                    {% for wr in roster.player_objects|selectattr('position', 'equalto', 'WR') %}
+                        {% if wr['player_id'] in roster.starters %}
+                            <b>{{ wr['full_name'] }}</b><br>
                         {% else %}
-                            {{ wr_name }}<br>
+                            {{ wr['full_name'] }}<br>
                         {% endif %}
                     {% endfor %}
                 </td>
                 <td>
-                    {% for te in roster.tes %}
-                        {% set te_name = players[te]['full_name'] %}
-                        {% if te in roster.starters %}
-                            <b>{{ te_name }}</b><br>
+                    {% for te in roster.player_objects|selectattr('position', 'equalto', 'TE') %}
+                        {% if te['player_id'] in roster.starters %}
+                            <b>{{ te['full_name'] }}</b><br>
                         {% else %}
-                            {{ te_name }}<br>
+                            {{ te['full_name'] }}<br>
                         {% endif %}
                     {% endfor %}
                 </td>
