@@ -33,7 +33,7 @@
         {% endif %}
 
         <table class="table">
-            <tr>
+            <thead>
                 <th>Owner ID</th>
                 <th>QBs</th>
                 <th>RBs</th>
@@ -41,9 +41,18 @@
                 <th>TEs</th>
                 <th>Ks</th>
                 <th>DEFs</th>
-            </tr>
+            </thead>
             {% for roster in rosters %}
             <tr>
+                {% set qb_avg, qb_stdev = stats.qb %}
+                {% set qb_score = (qb_avg - roster.avg_qb_rank) / qb_stdev %}
+                {% set rb_avg, rb_stdev = stats.rb %}
+                {% set rb_score = (rb_avg - roster.avg_rb_rank) / rb_stdev %}
+                {% set wr_avg, wr_stdev = stats.wr %}
+                {% set wr_score = (wr_avg - roster.avg_wr_rank) / wr_stdev %}
+                {% set te_avg, te_stdev = stats.te %}
+                {% set te_score = (te_avg - roster.avg_te_rank) / te_stdev %}
+
                 <td>{{ roster.owner_id }}</td>
                 <td>
                     {% for qb in roster.player_objects|selectattr('position', 'equalto', 'QB') %}
@@ -55,6 +64,7 @@
                     {% endfor %}
                 </td>
                 <td>
+                    {{ rb_score }}
                     {% for rb in roster.player_objects|selectattr('position', 'equalto', 'RB') %}
                         {% if rb['player_id'] in roster.starters %}
                             <b>{{ rb['full_name'] }}</b><br>
@@ -82,12 +92,11 @@
                     {% endfor %}
                 </td>
                 <td>
-                    {% for k in roster.ks %}
-                        {% set k_name = players[k]['full_name'] %}
-                        {% if k in roster.starters %}
-                            <b>{{ k_name }}</b><br>
+                    {% for k in roster.player_objects|selectattr('position', 'equalto', 'K') %}
+                        {% if k['player_id'] in roster.starters %}
+                            <b>{{ k['full_name'] }}</b><br>
                         {% else %}
-                            {{ k_name }}<br>
+                            {{ k['full_name'] }}<br>
                         {% endif %}
                     {% endfor %}
                 </td>
