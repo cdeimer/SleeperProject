@@ -44,6 +44,8 @@
             </thead>
             {% for roster in rosters %}
             <tr>
+                <!--
+                code to get the z-score for each position. I don't like the ranks I'm using so I won't be using this for now.
                 {% set qb_avg, qb_stdev = stats.qb %}
                 {% set qb_score = (qb_avg - roster.avg_qb_rank) / qb_stdev %}
                 {% set rb_avg, rb_stdev = stats.rb %}
@@ -52,6 +54,7 @@
                 {% set wr_score = (wr_avg - roster.avg_wr_rank) / wr_stdev %}
                 {% set te_avg, te_stdev = stats.te %}
                 {% set te_score = (te_avg - roster.avg_te_rank) / te_stdev %}
+                -->
 
                 <td>{{ roster.owner_id }}</td>
                 <td>
@@ -64,7 +67,6 @@
                     {% endfor %}
                 </td>
                 <td>
-                    {{ rb_score }}
                     {% for rb in roster.player_objects|selectattr('position', 'equalto', 'RB') %}
                         {% if rb['player_id'] in roster.starters %}
                             <b>{{ rb['full_name'] }}</b><br>
