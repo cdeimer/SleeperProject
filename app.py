@@ -9,12 +9,15 @@ app = Flask(__name__)
 def home():
     if request.method == 'POST':
         # do something
-        league_id = request.form['id']
-        league_name = get_league_info(league_id)['name']
-        rosters = get_rosters(league_id)
-        players = json.load(open('sleeper_players.json'))
-        print(get_avg_and_stdev(rosters))
-        return render_template('home_page.html', id=league_id, rosters=rosters, league_name=league_name, players=players, stats=get_avg_and_stdev(rosters))
+        if request.form['id']:
+            league_id = request.form['id']
+            league_info = get_league_info(league_id)
+            if league_info:
+                league_name = get_league_info(league_id)['name']
+                rosters = get_rosters(league_id)
+                players = json.load(open('sleeper_players.json'))
+                print(get_avg_and_stdev(rosters))
+                return render_template('home_page.html', id=league_id, rosters=rosters, league_name=league_name, players=players, stats=get_avg_and_stdev(rosters))
     return render_template('home_page.html')
 
 

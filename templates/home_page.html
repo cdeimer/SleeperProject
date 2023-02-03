@@ -8,18 +8,22 @@
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-    <!-- div for an input box and button that allows the user to submit an ID -->
-    <div>
-        <h1>Enter League ID</h1>
+    <!-- Site Header -->
+    <nav class="navbar navbar-light bg-light">
+        <span class="navbar-brand mb-0 h1">Sleeper Utilities</span>
+    </nav>
+
+    <!-- div for a bootstrap input group with a league id text input and submit button -->
+    <div class="container">
         <form method="post">
-            <label for="id">ID</label>
-            <br>
-            <input type="text" name="id"
-                placeholder="League ID"
-                value="{{ request.form['id'] }}"></input>
-            <button type="submit">Submit</button>
+            <div class="input-group-prepend my-3">
+                <span class="input-group-text" id="basic-addon1">League ID</span>
+                <input type="text" class="form-control" name="id" placeholder="League ID" value="{{ request.form['id'] }}">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit">Submit</button>
+                </div>
+            </div>
         </form>
-    </div>
 
     <!-- div for a table that displays the owner_id and all positions from the rosters object-->
     {% if rosters %}
