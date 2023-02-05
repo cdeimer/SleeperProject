@@ -17,6 +17,7 @@ def home():
                 rosters = get_rosters(league_id)
                 players = json.load(open('sleeper_players.json'))
                 return render_template('depth_chart.html', id=league_id, rosters=rosters, league_name=league_name, players=players, stats=get_avg_and_stdev(rosters))
+            return render_template('depth_chart.html', id=league_id)
     return render_template('depth_chart.html')
 
 

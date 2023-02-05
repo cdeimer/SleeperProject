@@ -108,5 +108,13 @@
             {% endfor %}
         </table>
     </div>
+    {% elif id %}
+        <div class="container">
+            <h2 class="text-light">No league found for the given ID</h2>
+        </div>
+    {% else %}
+        <div class="container">
+            <h2 class="text-light">Enter a league ID to get started</h2>
+        </div>
     {% endif %}
 {% endblock %}
