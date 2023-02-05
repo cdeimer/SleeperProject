@@ -1,12 +1,14 @@
 from collections import defaultdict
 import json
 from flask import Flask, render_template, request
+from pathlib import Path
 import requests
 import statistics
 app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
+    CURRENT_DIR = Path(__file__).parent.resolve()
     if request.method == 'POST':
         # do something
         if request.form['id']:
@@ -15,7 +17,7 @@ def home():
             if league_info:
                 league_name = get_league_info(league_id)['name']
                 rosters = get_rosters(league_id)
-                players = json.load(open('sleeper_players.json'))
+                players = json.load(open(CURRENT_DIR / 'sleeper_players.json'))
                 return render_template('depth_chart.html', id=league_id, rosters=rosters, league_name=league_name, players=players, stats=get_avg_and_stdev(rosters))
             return render_template('depth_chart.html', id=league_id)
     return render_template('depth_chart.html')
