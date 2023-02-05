@@ -13,3 +13,4 @@ TODO:
 - Make starters bold ✅
 - Clean up input area ✅
 - Make strong positional groups green, weak positional groups red
+- Key for the table, let users know what bold means etc
