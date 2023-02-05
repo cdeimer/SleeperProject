@@ -6,9 +6,10 @@ import requests
 import statistics
 app = Flask(__name__)
 
+CURRENT_DIR = Path(__file__).parent.resolve()
+
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    CURRENT_DIR = Path(__file__).parent.resolve()
     if request.method == 'POST':
         # do something
         if request.form['id']:
@@ -30,7 +31,7 @@ def get_rosters(league_id):
     response = requests.get(url)
     data = response.json()
     # load json data from sleeper_players.json into an object
-    players = json.load(open('sleeper_players.json'))
+    players = json.load(open(CURRENT_DIR / 'sleeper_players.json'))
     users = get_users(league_id)
 
     if data is not None:
