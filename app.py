@@ -16,9 +16,8 @@ def home():
                 league_name = get_league_info(league_id)['name']
                 rosters = get_rosters(league_id)
                 players = json.load(open('sleeper_players.json'))
-                print(get_avg_and_stdev(rosters))
-                return render_template('home_page.html', id=league_id, rosters=rosters, league_name=league_name, players=players, stats=get_avg_and_stdev(rosters))
-    return render_template('home_page.html')
+                return render_template('depth_chart.html', id=league_id, rosters=rosters, league_name=league_name, players=players, stats=get_avg_and_stdev(rosters))
+    return render_template('depth_chart.html')
 
 
 # get all rosters from a league given a league id using the sleeper API
@@ -62,7 +61,6 @@ def get_rosters(league_id):
             r['avg_wr_rank'] = get_avg_rank(player_object_list, 'WR')
             r['avg_te_rank'] = get_avg_rank(player_object_list, 'TE')
 
-            print(r['owner_id'], r['avg_team_rank'], r['avg_qb_rank'], r['avg_rb_rank'], r['avg_wr_rank'], r['avg_te_rank'])
             rosters.append(r)
 
     return rosters
@@ -122,6 +120,5 @@ def get_avg_and_stdev(rosters):
         ranks = []
         for roster in rosters:
             ranks.append(roster['avg_' + position + '_rank'])
-        print(position, ranks)
         stats[position] = (statistics.mean(ranks), statistics.stdev(ranks))
     return stats

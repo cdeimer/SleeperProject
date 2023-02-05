@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Sleeper Depth Chart</title>
+    
+
+        <!-- bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+        <!-- set background color to something dark -->
+        <style>
+            body {
+                background-color: #3e444a;
+            }
+        </style>
+
+
+        <!-- Site Header -->
+        <nav class="navbar navbar-dark bg-dark">
+            <span class="navbar-brand mb-0 h1">Sleeper Utilities</span>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Depth Chart</a>
+                </li>
+            </ul>
+        </nav>
+    </head>
+
+    <body>
+        <div id="content">
+            {% block content %}{% endblock %}
+        </div>
+
+        <div id="footer">
+            {% block footer %}
+                &copy; 2023 - Cullen Deimer
+            {% endblock %}
+        </div>
+
+    </body>

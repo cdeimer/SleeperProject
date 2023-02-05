@@ -1,42 +1,31 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <title>Sleeper Depth Chart</title>
-    </head>
-
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-
-    <!-- Site Header -->
-    <nav class="navbar navbar-light bg-light">
-        <span class="navbar-brand mb-0 h1">Sleeper Utilities</span>
-    </nav>
+{% extends "base.html" %}
+{% block content %}
 
     <!-- div for a bootstrap input group with a league id text input and submit button -->
     <div class="container">
         <form method="post">
-            <div class="input-group-prepend my-3">
-                <span class="input-group-text" id="basic-addon1">League ID</span>
+            <div class="input-group my-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">League ID</span>
+                </div>
                 <input type="text" class="form-control" name="id" placeholder="League ID" value="{{ request.form['id'] }}">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="submit">Submit</button>
+                    <button class="btn btn-dark" type="submit">Submit</button>
                 </div>
             </div>
         </form>
 
     <!-- div for a table that displays the owner_id and all positions from the rosters object-->
     {% if rosters %}
-    <div class="container">
 
-        <!-- div for a heading that displays the given ID -->
+        <!-- div for a heading that displays the given ID with light text -->
         {% if league_name %}
         <div>
-            <h1>{{ league_name }}</h1>
+            <h1 class="text-light">{{ league_name }}</h1>
         </div>
         {% endif %}
 
-        <table class="table">
+        <table class="table table-striped table-dark">
             <thead>
                 <th>Owner ID</th>
                 <th>QBs</th>
@@ -120,5 +109,4 @@
         </table>
     </div>
     {% endif %}
-
-</html>
+{% endblock %}
