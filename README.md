@@ -14,3 +14,5 @@ TODO:
 - Clean up input area ✅
 - Make strong positional groups green, weak positional groups red
 - Key for the table, let users know what bold means etc ✅
+- Favicon
+- Make more mobile friendly
