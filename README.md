@@ -16,3 +16,4 @@ TODO:
 - Key for the table, let users know what bold means etc ✅
 - Favicon
 - Make more mobile friendly
+- Highlight active link in navbar
